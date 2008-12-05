@@ -1,0 +1,9 @@
+setup.cfg
+setup.py
+ReportedIt.egg-info/PKG-INFO
+ReportedIt.egg-info/SOURCES.txt
+ReportedIt.egg-info/dependency_links.txt
+ReportedIt.egg-info/entry_points.txt
+ReportedIt.egg-info/not-zip-safe
+ReportedIt.egg-info/top_level.txt
+reportedit/__init__.py
