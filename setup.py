@@ -5,22 +5,25 @@ version = '0.1'
 
 setup(name='ReportedIt',
       version=version,
-      description="Report Shit",
+      description="Mobile Geolocated Reporting",
       long_description="""\
 """,
       classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      keywords='',
-      author='anilm, iwillig, rpenate, whitmo, bugs the bunny',
-      author_email='reportedit@spatialdistillery.com',
+      keywords='mobile framework',
+      author='iwillig, scrollie, anil, whitmo',
+      author_email='reportit@spatialdistillery.com',
       url='http://www.spatialdistillery.com',
-      license='MIT',
+      license='GPL',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
       install_requires=[
           # -*- Extra requirements: -*-
+          'PasteDeploy',
       ],
       entry_points="""
       # -*- Entry points: -*-
+      [paste.app_factory]
+      main = reportedit.wsgiapp:make_app
       """,
       )
