@@ -1,10 +1,11 @@
 Metadata-Version: 1.0
 Name: ReportedIt
 Version: 0.1dev
-Summary: Report Shit
+Summary: Mobile Geolocated Reporting
 Home-page: http://www.spatialdistillery.com
-Author: anilm, iwillig, rpenate, whitmo, bugs the bunny
-Author-email: reportedit@spatialdistillery.com
-License: MIT
+Author: iwillig, scrollie, anil, whitmo
+Author-email: reportit@spatialdistillery.com
+License: GPL
 Description: UNKNOWN
+Keywords: mobile framework
 Platform: UNKNOWN

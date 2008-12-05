@@ -1,9 +1,10 @@
 #import cgi
-from paste.deploy import CONFIG
+#from paste.deploy import CONFIG
 from paste.deploy.config import ConfigMiddleware
 from selector import ByMethod
-from webob import Response
-from reporedit import wsgi 
+#from webob import Response
+from reportedit import wsgi 
+import static
 
 
 # def application(environ, start_response):
@@ -34,7 +35,7 @@ class FormHandler(ByMethod):
         request.environ['PATH_INFO'] = '/form.html'
         return static(request.environ, start_response)
 
-    def POST(self. request, start_response): 
+    def POST(self, request, start_response): 
         ''' 
         persist or return error
         ''' 
@@ -43,7 +44,7 @@ class FormHandler(ByMethod):
 
 
 def get_static(req):
-    return req.environ['paste.config']['psid.static_app']
+    return req.environ['paste.config']['reportedit.static_app']
 
 def get_static_res(req, start_response):
     app = get_static(req)
@@ -54,6 +55,18 @@ def get_static_res(req, start_response):
 def make_app(global_conf, **kw):
     conf = global_conf.copy()
     conf.update(kw)
+    magics = [static.StringMagic(**conf)]
+    res_spec = conf.get('resource', 'reportedit:resource').split(":")
+    if len(res_spec) == 2:
+        pkg, res = res_spec
+        static_app = wsgi.shock_wrap(pkg, res, magics=magics)
+    else:
+        res = res_spec[0]
+        static_app = static.Shock(res, magics=magics)
+
     conf['reportedit.static_app'] = static_app
+    app = wsgi.AutoSelector(wrap=wsgi.WebObWrapper)
+    app.add("/", FormHandler())
+
     app = ConfigMiddleware(app, conf)
     return app

@@ -1,1 +1,1 @@
-
+http://svn.pythonpaste.org/Paste/WebTest/trunk#egg=WebTest

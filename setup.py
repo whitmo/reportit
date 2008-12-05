@@ -18,12 +18,22 @@ setup(name='ReportedIt',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          # -*- Extra requirements: -*-
-          'PasteDeploy',
+        'PasteDeploy',
+        'PasteScript',
+        'WebOb',
+        'resolver',
+        'decorator',
+        'selector',
+        'static'
       ],
+      dependency_links=['http://svn.pythonpaste.org/Paste/WebTest/trunk#egg=WebTest'],
+      test_suite='nose.collector',
+      test_requires=["WebTest>=1.1.1dev",
+                     "nose"
+                     ],
       entry_points="""
       # -*- Entry points: -*-
       [paste.app_factory]
-      main = reportedit.wsgiapp:make_app
+      main = reportedit.app:make_app
       """,
       )

@@ -1,5 +1,0 @@
-def setup(tc):
-    pass
-
-def teardown(tc):
-    pass
