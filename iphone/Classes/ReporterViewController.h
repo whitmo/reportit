@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ReporterViewController : UIViewController {
+@interface ReporterViewController : UIViewController <UITextFieldDelegate> {
 	
     IBOutlet UITextField *txtProblem;
 	IBOutlet UILabel *lblMessage;

@@ -272,7 +272,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
+									<integer>4</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -315,7 +315,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ReportItAppDelegate.m</string>
+								<string>ReporterViewController.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,20 +323,20 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ReportItAppDelegate.m</string>
+										<string>ReporterViewController.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>04CD343D0EECCE8300EF635A</string>
+										<string>04CD344A0EECCFB200EF635A</string>
 										<key>history</key>
 										<array>
 											<string>04CD33C30EECB03800EF635A</string>
 											<string>04CD33C40EECB03800EF635A</string>
 											<string>04CD33C50EECB03800EF635A</string>
-											<string>04CD342F0EECCE8300EF635A</string>
-											<string>04CD34300EECCE8300EF635A</string>
-											<string>04CD34310EECCE8300EF635A</string>
-											<string>04CD34320EECCE8300EF635A</string>
+											<string>04CD34400EECCFB200EF635A</string>
+											<string>04CD34410EECCFB200EF635A</string>
+											<string>04CD34420EECCFB200EF635A</string>
+											<string>04CD34430EECCFB200EF635A</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -367,6 +367,12 @@
 											<string>04CD343A0EECCE8300EF635A</string>
 											<string>04CD343B0EECCE8300EF635A</string>
 											<string>04CD343C0EECCE8300EF635A</string>
+											<string>04CD34440EECCFB200EF635A</string>
+											<string>04CD34450EECCFB200EF635A</string>
+											<string>04CD34460EECCFB200EF635A</string>
+											<string>04CD34470EECCFB200EF635A</string>
+											<string>04CD34480EECCFB200EF635A</string>
+											<string>04CD34490EECCFB200EF635A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

@@ -51,6 +51,13 @@
 	// Release anything that's not essential, such as cached data
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+	if(theTextField == txtProblem) {
+		[txtProblem resignFirstResponder];
+	}
+	
+	return YES;
+}
 
 
 - (void)dealloc {

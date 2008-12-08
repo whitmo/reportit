@@ -141,6 +141,14 @@
 					</object>
 					<int key="connectionID">9</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="996801146"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">10</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -159,8 +167,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="50327235"/>
-							<reference ref="996801146"/>
 							<reference ref="455319244"/>
+							<reference ref="996801146"/>
 						</object>
 						<reference key="parent" ref="360949347"/>
 					</object>
@@ -235,7 +243,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">9</int>
+			<int key="maxID">10</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
