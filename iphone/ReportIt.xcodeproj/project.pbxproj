@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		04CD33E40EECB0D200EF635A /* ReporterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CD33E30EECB0D200EF635A /* ReporterViewController.m */; };
 		04CD34060EECCA3A00EF635A /* reporter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CD34050EECCA3A00EF635A /* reporter.xib */; };
+		04CD34660EECD56C00EF635A /* MyCLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CD34650EECD56C00EF635A /* MyCLController.m */; };
+		04CD34690EECDB6800EF635A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CD34680EECDB6800EF635A /* CoreLocation.framework */; };
 		1D3623260D0F684500981E51 /* ReportItAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* ReportItAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -21,6 +23,9 @@
 		04CD33E20EECB0D200EF635A /* ReporterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReporterViewController.h; sourceTree = "<group>"; };
 		04CD33E30EECB0D200EF635A /* ReporterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReporterViewController.m; sourceTree = "<group>"; };
 		04CD34050EECCA3A00EF635A /* reporter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = reporter.xib; sourceTree = "<group>"; };
+		04CD34640EECD55F00EF635A /* MyCLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCLController.h; sourceTree = "<group>"; };
+		04CD34650EECD56C00EF635A /* MyCLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCLController.m; sourceTree = "<group>"; };
+		04CD34680EECDB6800EF635A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* ReportItAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportItAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* ReportItAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportItAppDelegate.m; sourceTree = "<group>"; };
@@ -41,6 +46,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				04CD34690EECDB6800EF635A /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +56,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				04CD34650EECD56C00EF635A /* MyCLController.m */,
+				04CD34640EECD55F00EF635A /* MyCLController.h */,
 				1D3623240D0F684500981E51 /* ReportItAppDelegate.h */,
 				1D3623250D0F684500981E51 /* ReportItAppDelegate.m */,
 				04CD33E20EECB0D200EF635A /* ReporterViewController.h */,
@@ -100,6 +108,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04CD34680EECDB6800EF635A /* CoreLocation.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -164,6 +173,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* ReportItAppDelegate.m in Sources */,
 				04CD33E40EECB0D200EF635A /* ReporterViewController.m in Sources */,
+				04CD34660EECD56C00EF635A /* MyCLController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -353,9 +353,9 @@
 	};
 	04CD33E30EECB0D200EF635A /* ReporterViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {587, 1036}}";
-			sepNavSelRange = "{1455, 0}";
-			sepNavVisRange = "{1114, 462}";
+			sepNavIntBoundsRect = "{{0, 0}, {534, 1008}}";
+			sepNavSelRange = "{342, 0}";
+			sepNavVisRange = "{190, 379}";
 		};
 	};
 	04CD33E60EECB13900EF635A /* PBXTextBookmark */ = {

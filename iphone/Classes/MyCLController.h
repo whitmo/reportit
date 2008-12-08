@@ -46,7 +46,11 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 */
 
+#import <CoreLocation/CoreLocation.h>
 #import <CoreLocation/CLLocationManagerDelegate.h>
+#import <CoreLocation/CLLocationManager.h>
+#import <CoreLocation/CLLocation.h>
+#import <CoreLocation/CLError.h>
 
 // This protocol is used to send the text for location updates back to another view controller
 @protocol MyCLControllerDelegate <NSObject>
