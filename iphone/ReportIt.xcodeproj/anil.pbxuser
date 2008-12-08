@@ -1,0 +1,82 @@
+// !$*UTF8*$!
+{
+	04CD33950EECAD7500EF635A /* ReportIt */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = ReportIt;
+		sourceDirectories = (
+		);
+	};
+	04CD33A10EECAD7700EF635A /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+	};
+	04CD33A20EECAD7700EF635A /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	1D6058900D05DD3D006BFB54 /* ReportIt */ = {
+		activeExec = 0;
+		executables = (
+			04CD33950EECAD7500EF635A /* ReportIt */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 04CD33950EECAD7500EF635A /* ReportIt */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* ReportIt */;
+		codeSenseManager = 04CD33A20EECAD7700EF635A /* Code sense */;
+		executables = (
+			04CD33950EECAD7500EF635A /* ReportIt */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					341,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 250392011;
+			PBXWorkspaceStateSaveDate = 250392011;
+		};
+		sourceControlManager = 04CD33A10EECAD7700EF635A /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+}
