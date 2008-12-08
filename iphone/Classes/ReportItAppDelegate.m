@@ -7,20 +7,31 @@
 //
 
 #import "ReportItAppDelegate.h"
+#import "ReporterViewController.h"
 
 @implementation ReportItAppDelegate
 
-@synthesize window;
+@synthesize window, viewController;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
 
+	ReporterViewController *vController = [[ReporterViewController alloc]
+										   initWithNibName:@"reporter" bundle:[NSBundle mainBundle]];
+	
+	self.viewController = vController;
+	
+	[vController release];
+	
+	[window addSubview:[viewController view]];
+	
     // Override point for customization after application launch
     [window makeKeyAndVisible];
 }
 
 
 - (void)dealloc {
+	[viewController release];
     [window release];
     [super dealloc];
 }
