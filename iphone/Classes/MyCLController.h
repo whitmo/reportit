@@ -55,7 +55,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 // This protocol is used to send the text for location updates back to another view controller
 @protocol MyCLControllerDelegate <NSObject>
 @required
--(void)newLocationUpdate:(NSString *)text;
+-(void)newLocationUpdate:(NSString *)status latitude:(float)latitude longitude:(float)longitude timeStamp:(NSString *)timeStamp;
 -(void)newError:(NSString *)text;
 @end
 

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MyCLController.h"
 
-@interface ReporterViewController : UIViewController <UITextFieldDelegate> {
+
+@interface ReporterViewController : UIViewController <UITextFieldDelegate, MyCLControllerDelegate> {
 	
     IBOutlet UITextField *txtProblem;
 	IBOutlet UILabel *lblMessage;

@@ -75,12 +75,14 @@ static MyCLController *sharedCLDelegate = nil;
 		   fromLocation:(CLLocation *)oldLocation
 {
 	NSMutableString *update = [[[NSMutableString alloc] init] autorelease];
-	
+	NSMutableString *locationTimeStamp = [[[NSMutableString alloc] init] autorelease];
+
 	// Timestamp
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init]  autorelease];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-	[update appendFormat:@"%@\n\n", [dateFormatter stringFromDate:newLocation.timestamp]];
+	[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm'Z'"];
+	[locationTimeStamp appendFormat:@"%@\n\n", [dateFormatter stringFromDate:newLocation.timestamp]];
 	
 	// Horizontal coordinates
 	if (signbit(newLocation.horizontalAccuracy)) {
@@ -88,15 +90,14 @@ static MyCLController *sharedCLDelegate = nil;
 		[update appendString:LocStr(@"LatLongUnavailable")];
 	} else {
 		// CoreLocation returns positive for North & East, negative for South & West
-        NSString *tempMessage = nil;
-        tempMessage = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.latitude];
-        
-        [update appendString:LocStr(tempMessage)];
-        [tempMessage release];
+		[update appendString:LocStr(@"LatLongAvailable")];
 	}
 
 	// Send the update to our delegate
-	[self.delegate newLocationUpdate:update];
+	[self.delegate newLocationUpdate:update latitude:newLocation.coordinate.latitude 
+											longitude:newLocation.coordinate.longitude
+											timeStamp:locationTimeStamp];
+	
 }
 
 

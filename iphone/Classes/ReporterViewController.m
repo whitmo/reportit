@@ -13,10 +13,7 @@
 @synthesize txtProblem, lblMessage, sProblem;
 
 - (IBAction) sendProblem:(id)sender {	
-	NSString* tempMessage;
-	tempMessage = [[NSString alloc] initWithFormat:@"Sent!  Thank you for reporting!"];
-	lblMessage.text = tempMessage;
-	[tempMessage release];
+	[[MyCLController sharedInstance].locationManager startUpdatingLocation];
 }
 
 
@@ -33,11 +30,9 @@
  }
  */
 
-/*
- If you need to do additional setup after loading the view, override viewDidLoad.
  - (void)viewDidLoad {
+	 [MyCLController sharedInstance].delegate = self;
  }
- */
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -57,6 +52,45 @@
 	}
 	
 	return YES;
+}
+
+- (void)newLocationUpdate:(NSString *)status latitude: (float)latitude longitude: (float)longitude timeStamp: (NSString *)timeStamp {
+	
+	NSString *tempMessage = nil;
+	
+	NSString *eyesServer = nil;
+	eyesServer = [[NSString alloc] initWithFormat:@"http://localhost/~anil/test_post.php"];
+	
+	NSString *postContent = nil;
+	postContent = [[NSString alloc] initWithFormat:@"problem=%@&latitude=%f&longitude=%f&timeStamp=%@", txtProblem.text, latitude, longitude, timeStamp];
+	
+	// url is set to be some URL string.
+	NSMutableURLRequest* post = [NSMutableURLRequest requestWithURL: [NSURL URLWithString: eyesServer]];
+	[post setHTTPMethod: @"POST"];
+	[post setHTTPBody: [[[NSString alloc] initWithString: postContent] 
+						dataUsingEncoding: NSASCIIStringEncoding]];
+	
+	NSURLConnection* theConnection = [NSURLConnection connectionWithRequest: post
+																   delegate: self];
+	[theConnection retain];
+	
+	
+	tempMessage = [[NSString alloc] initWithFormat:@"Sent!  Thank you for reporting!"];
+	
+	lblMessage.text = tempMessage;
+	
+	
+	[eyesServer release];
+	
+	[tempMessage release];
+	[[MyCLController sharedInstance].locationManager stopUpdatingLocation];
+	
+	
+}
+
+
+-(void)newError:(NSString *)text {
+	
 }
 
 
