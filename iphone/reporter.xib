@@ -117,7 +117,7 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 440}</string>
+				<string key="NSFrameSize">{330, 518}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -237,7 +237,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ReporterViewController</string>
 					<string>UIResponder</string>
-					<string>{{449, 389}, {320, 440}}</string>
+					<string>{{449, 311}, {330, 518}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<integer value="0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
