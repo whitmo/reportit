@@ -1,5 +1,0 @@
-
-      # -*- Entry points: -*-
-      [paste.app_factory]
-      main = reportedit.app:make_app
-      
