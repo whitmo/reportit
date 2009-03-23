@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-from webmaps.trackit import views 
+from py.buildmeabikerack import views 
 
 # Uncomment the next two lines to enable the admin:
 
@@ -10,8 +10,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
-     (r'^$', 'webmaps.trackit.views.index'), 
-     (r'map/$', 'webmaps.trackit.views.map'),
+    (r'^$', 'py.buildmeabikerack.views.index'), 
+    (r'^racks/new/$', 'py.buildmeabikerack.views.newrack'), 
+    (r'^neighborhoods/$', 'py.buildmeabikerack.views.neighborhoods'), 
+    
+
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:

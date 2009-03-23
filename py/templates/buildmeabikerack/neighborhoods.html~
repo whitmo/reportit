@@ -1,0 +1,53 @@
+{% extends "buildmeabikerack/base.html" %} 
+{% block title %} Buildmeabikerack - Home {% endblock %} 
+
+{% block menu %} 
+<div id="header">
+  <ul id="menu" class="span-20"> 
+    <li class="active"><a href=" "> index /</a></li> 
+    <li><a href="/racks/new/">add new rack request /</a></li> 
+    <li><a href="/neighborhoods/">view requests by neighborhoods /</a></li> 
+    <li><a href="/dataview">view requests by community board /</a></li> 
+  </ul>
+  <div id="login-control" class="span-20">     
+  </div>
+
+</div>
+<hr />
+{% endblock %} 
+
+{% block content %} 
+<div id="map" class="span-9"> 
+<h2>map /</h2>
+</div>
+
+<div id="feeds" class="span-15 last"> 
+<h2>feeds /</h2>
+ <hr /> 
+   <div class="span-5"> 
+      <h3>requested racks /</h3> 
+      <hr />
+
+      <ul id="feed"> 
+      {% for rack in recent_request %} 
+        <li> <h4><a href="rack/{{rack.id}}">{{rack.location_meta}}</a> </h4> </li>
+	<li> {{rack.date}} </li>	
+	<li> {{rack.meta|truncatewords:10}} </li>
+      {% endfor %}
+      </ul>
+   </div>
+   <div class="span-5"> 
+     <h3>pending bike racks /</h3>
+     <hr />
+   </div>
+   <div class="span-5 last"> 
+     <h3>built bike racks /</h3> 
+     <hr />
+   </div>
+
+</div>
+
+{% endblock %} 
+
+
+
