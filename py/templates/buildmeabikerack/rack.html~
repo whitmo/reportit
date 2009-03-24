@@ -6,7 +6,7 @@
   <ul id="menu" class="span-20"> 
     <li><a href="/"> index /</a></li> 
     <li><a href="/rack/new/">add new rack request /</a></li> 
-    <li class="active"><a href="/neighborhoods/">view requests by neighborhoods /</a></li> 
+    <li><a href="/neighborhoods/">view requests by neighborhoods /</a></li> 
     <li><a href="/dataview">view requests by community board /</a></li> 
   </ul>
   <div id="login-control" class="span-20">     
@@ -19,9 +19,6 @@
 {% block content %} 
 
 
-{% for neighborhoods in neighborhood_list %}
-<div class="span-4">{{neighborhoods.name}}</div>
-{% endfor %}
 
 {% endblock %} 
 

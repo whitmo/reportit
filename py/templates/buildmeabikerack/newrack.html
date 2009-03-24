@@ -5,7 +5,7 @@
 <div id="header">
   <ul id="menu" class="span-20"> 
     <li><a href="/"> index </a></li> 
-    <li class="active"<a href="/racks/new/">add new rack request</a></li> 
+    <li class="active"> <a href="/rack/new/">add new rack request</a></li> 
     <li><a href="/neighborhoods/">view requests by neighborhoods /</a></li> 
     <li><a href="dataview"> view requests by community board</a></li> 
   </ul>
@@ -21,19 +21,9 @@
 <div class="span-24" id="newrack"> 
   <h2>you are adding a new bike rack </h2> 
   
-  <form id="newrack" action="@api/new/rack/" method="post">
-    <div class="span-12">
-      <input type="text" />
-      <input type="text" /> 
-      <input type="text" />
-
-      <input type="file" />
-      <button>A new bike rack </button> 
-      
-    </div>
-    <div class="span-12 last">
-      <textarea name="meta"> </textarea>
-    </div>
+  <form id="newrack" action="." method="post">
+    {{form.as_p}}
+    <input type="submit" value="Submit" />
   </form>
 
 

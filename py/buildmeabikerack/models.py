@@ -1,20 +1,24 @@
 from django.contrib.gis.db import models
+from django.forms import ModelForm
+
 
 # Create your models here.
 
 
 class Rack(models.Model): 
     date = models.DateTimeField()    
-    location = models.CharField(max_length=200)
     location_meta = models.CharField(max_length=200)
     meta = models.TextField()
     contact_email = models.EmailField()
     STATUS_STATE  = ( 
         ('st', 'start'),
-        ('as', 'asses'),
+        ('as', 'assess'),
         ('fn','finished'),
     )
     status = models.CharField(max_length=2, choices=STATUS_STATE)
+    location = models.PointField(srid=4326)
+    objects = models.GeoManager()
+
 
 
 class Neighborhoods(models.Model):
@@ -30,3 +34,8 @@ class Neighborhoods(models.Model):
     class Meta:
         db_table = u'buildmeabikerack_neighborhoods'
 
+
+
+class RackForm(ModelForm): 
+    class Meta: 
+        model = Rack 

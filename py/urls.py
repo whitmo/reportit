@@ -11,9 +11,14 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     (r'^$', 'py.buildmeabikerack.views.index'), 
-    (r'^racks/new/$', 'py.buildmeabikerack.views.newrack'), 
+    (r'^rack/(?P<rack_id>\d+)/$', 'py.buildmeabikerack.views.rack'),                        
+    (r'^rack/new/$', 'py.buildmeabikerack.views.newrack'), 
+
+                       
     (r'^neighborhoods/$', 'py.buildmeabikerack.views.neighborhoods'), 
-    
+
+
+#    (r'^@api/rack/$','py.buildmeabikerack.views.api_newrack'), 
 
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
