@@ -16,12 +16,23 @@
 <hr />
 {% endblock %} 
 
+
+
 {% block content %} 
+{% regroup neighborhood_list|dictsort:"city" by city as neighborhood_group %}
+{% for city in neighborhood_group %} 
 
+<div class="span-12">
+  <h3> {{city.grouper}} </h3> 
+</div>
 
-{% for neighborhoods in neighborhood_list %}
-<div class="span-4">{{neighborhoods.name}}</div>
-{% endfor %}
+<div class="span-12">
+{% for item in city.list %} 
+     <div class="span-3 last"><a href="#"> {{item.name}}</a></div>
+{% endfor %} 
+
+</div>
+{% endfor %} 
 
 {% endblock %} 
 

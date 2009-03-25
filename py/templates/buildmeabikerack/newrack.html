@@ -1,6 +1,36 @@
 {% extends "buildmeabikerack/base.html" %} 
 {% block title %} Buildmeabikerack - Home {% endblock %} 
 
+{% block header %} 
+
+<script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAApLR-B_RMiEN2UBRoEWYPlhQecd-0GqOLpdRWplIF-3MYC68zSxRSW_ICu5UQSFOD7TYr-Um0_71xuw'></script>
+
+
+<script src="http://openlayers.org/dev/OpenLayers.js"></script>
+<script defer="defer" type="text/javascript">
+        var map, layer;
+        function init(){
+	map = new OpenLayers.Map('location-rack-map');
+
+            var gphy = new OpenLayers.Layer.Google(
+                "Google Physical",
+                {type: G_PHYSICAL_MAP}
+            );
+        map.addLayer(gphy);
+	map.setCenter(new OpenLayers.LonLat(-73.94,40.63),10); 
+        }
+</script>    
+
+
+<script defer="defer" type="text/javascript">
+window.onload = function(){
+  init() ;
+};
+</script>
+
+{% endblock %} 
+
+
 {% block menu %} 
 <div id="header">
   <ul id="menu" class="span-20"> 
@@ -20,9 +50,23 @@
 {% block content %} 
 <div class="span-24" id="newrack"> 
   <h2>you are adding a new bike rack </h2> 
-  
+  <h3> choose a location </h3> 
+  <div id="location-rack-map" class="span-24"> 
+  </div>
+ <hr /> 
   <form id="newrack" action="." method="post">
-    {{form.as_p}}
+
+    <div class="formwrapper"> 
+      {{from.date}} 
+    </div>
+
+    <div class="formwrapper">
+     {{ form.date }} 
+    </div>
+    <div class="formwrapper"> 
+      {{form.meta}}
+    </div>
+
     <input type="submit" value="Submit" />
   </form>
 
