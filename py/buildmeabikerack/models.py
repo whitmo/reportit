@@ -6,21 +6,23 @@ from django.forms import ModelForm
 
 
 class Rack(models.Model): 
+    location = models.PointField(srid=4326)
     date = models.DateTimeField()    
     location_meta = models.CharField(max_length=200)
     meta = models.TextField()
     contact_email = models.EmailField()
     STATUS_STATE  = ( 
-        ('st', 'start'),
-        ('as', 'assess'),
-        ('fn','finished'),
+        ('r', 'requested'),
+        ('a', 'undering assessment'),
+        ('b','built'),
+        ('n','not built')
+                      
     )
-    status = models.CharField(max_length=2, choices=STATUS_STATE)
-    location = models.PointField(srid=4326)
+    status = models.CharField(max_length=1, choices=STATUS_STATE)
     objects = models.GeoManager()
 
 
-
+'''
 class Neighborhoods(models.Model):
     gid = models.IntegerField(primary_key=True)
     state = models.CharField(max_length=2)
@@ -34,7 +36,7 @@ class Neighborhoods(models.Model):
     class Meta:
         db_table = u'gis_neighborhoods'
 
-
+'''
 
 class RackForm(ModelForm): 
     class Meta: 

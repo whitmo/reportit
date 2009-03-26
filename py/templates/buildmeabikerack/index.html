@@ -1,10 +1,7 @@
 {% extends "buildmeabikerack/base.html" %} 
-{% block title %} Buildmeabikerack - Home {% endblock %} 
+{% block title %} buildmeabikerack - home {% endblock %} 
 
 {% block header %} 
-
-<script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAApLR-B_RMiEN2UBRoEWYPlhQecd-0GqOLpdRWplIF-3MYC68zSxRSW_ICu5UQSFOD7TYr-Um0_71xuw'></script>
-
 
 <script src="http://openlayers.org/dev/OpenLayers.js"></script>
 <script defer="defer" type="text/javascript">
@@ -12,11 +9,6 @@
         function init(){
 	map = new OpenLayers.Map('index-map');
 
-        var gphy = new OpenLayers.Layer.Google(
-        "Google Physical",
-        {type: G_PHYSICAL_MAP},
-	{sphericalMercator: true}
-        );
         layer = new OpenLayers.Layer.WMS( "OpenStreetMap", 
         [
         "http://oam1.hypercube.telascience.org/tiles/",
@@ -24,7 +16,6 @@
         "http://oam3.hypercube.telascience.org/tiles/"
         ],
         {layers: 'openaerialmap'}, {'wrapDateLine': true, buffer: 1} );
-        map.addLayer(layer);
 
 
         kml = new OpenLayers.Layer.GML("KML", "./rack/all.kml", 
@@ -39,7 +30,7 @@
 <script defer="defer" type="text/javascript">
 window.onload = function(){
   init() ;
-};
+}
 </script>
 
 
@@ -49,10 +40,10 @@ window.onload = function(){
 {% block menu %} 
 <div id="header">
   <ul id="menu" class="span-20"> 
-    <li class="active"><a href="/"> index /</a></li> 
-    <li><a href="/rack/new/">add new rack request /</a></li> 
-    <li><a href="/neighborhoods/">view requests by neighborhoods /</a></li> 
-    <li><a href="/dataview">view requests by community board /</a></li> 
+    <li class="active"><a href="/">index</a></li> 
+    <li><a href="/rack/new/">add new rack request</a></li> 
+    <li><a href="/neighborhoods/">view requests by neighborhoods</a></li> 
+    <li><a href="/dataview">view requests by community board</a></li> 
   </ul>
   <div id="login-control" class="span-20">     
   </div>
@@ -62,37 +53,44 @@ window.onload = function(){
 {% endblock %} 
 
 {% block content %} 
-<h2>map /</h2>
-<div id="index-map" class="span-24"> 
-</div>
 
-<div id="feeds" class="span-24"> 
-<h2>feeds /</h2>
+<div id="feeds"> 
+<h2>feeds</h2>
  <hr /> 
-   <div class="span-8"> 
-      <h3>requested racks /</h3> 
-      <hr />
+   <div> 
+      <h3>request a rack</h3> 
+      	  <form action="rack/new/" method="get"> 
+	    <p> address of a rack </p>
+	     <input type="text"  name="address" /> 
+	    <input type="submit"> 
+	  </form>
 
+      <hr />
       <ul id="feed"> 
       {% for rack in recent_request %} 
-        <li> 
+        <li>
 	  <h4><a href="rack/{{rack.id}}/">{{rack.location_meta}}</a> </h4>
-	  {{rack.date}} 	
-	  {{rack.meta|truncatewords:10}}
+	  <p> {{rack.date}}</p>
+	  <p> {{rack.meta|truncatewords:20}}</p>
 	</li>
       {% endfor %}
       </ul>
    </div>
-   <div class="span-8"> 
-     <h3>pending bike racks /</h3>
+   <div> 
+     <h3>pending bike racks</h3>
      <hr />
    </div>
-   <div class="span-8 last"> 
-     <h3>built bike racks /</h3> 
+   <div> 
+     <h3>built bike racks</h3> 
      <hr />
    </div>
-
 </div>
+<div>
+  <div id="index-map"> 
+  </div>
+  <h3>Download and view in <a href="rack/all.kml">Google Earth</a></h3>
+</div>
+
 
 {% endblock %} 
 

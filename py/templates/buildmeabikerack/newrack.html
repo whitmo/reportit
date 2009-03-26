@@ -3,29 +3,40 @@
 
 {% block header %} 
 
-<script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAApLR-B_RMiEN2UBRoEWYPlhQecd-0GqOLpdRWplIF-3MYC68zSxRSW_ICu5UQSFOD7TYr-Um0_71xuw'></script>
-
 
 <script src="http://openlayers.org/dev/OpenLayers.js"></script>
 <script defer="defer" type="text/javascript">
         var map, layer;
         function init(){
-	map = new OpenLayers.Map('location-rack-map');
+	map = new OpenLayers.Map('new-bike-rack');
 
-            var gphy = new OpenLayers.Layer.Google(
-                "Google Physical",
-                {type: G_PHYSICAL_MAP}
-            );
-        map.addLayer(gphy);
+        layer = new OpenLayers.Layer.WMS( "OpenStreetMap", 
+        [
+        "http://oam1.hypercube.telascience.org/tiles/",
+        "http://oam2.hypercube.telascience.org/tiles/",
+        "http://oam3.hypercube.telascience.org/tiles/"
+        ],
+        {layers: 'openaerialmap'}, {'wrapDateLine': true, buffer: 1} );
+
+	
+	var wkt_f = new OpenLayers.Format.WKT();
+	var vectors  = new OpenLayers.Layer.Vector("new rack request");
+	var wkt  = 'POINT({{lng}} {{lat}})' ;
+	var features   = wkt_f.read(wkt) ;
+	vectors.addFeatures(features);
+
+        map.addLayers([layer,vectors]);
 	map.setCenter(new OpenLayers.LonLat(-73.94,40.63),10); 
         }
 </script>    
 
 
 <script defer="defer" type="text/javascript">
+
 window.onload = function(){
   init() ;
 };
+
 </script>
 
 {% endblock %} 
@@ -49,9 +60,12 @@ window.onload = function(){
 
 {% block content %} 
 <div class="span-24" id="newrack"> 
-  <h2>you are adding a new bike rack </h2> 
+  <h2>You are adding a new bike rack request</h2> 
   <hr /> 
+
   <form id="newrack" action="." method="post">
+    <div id="new-bike-rack">       
+    </div>
     {{form.as_p}}
     <input type="submit" />
   </form>
