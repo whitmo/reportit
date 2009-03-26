@@ -32,7 +32,7 @@ class Neighborhoods(models.Model):
     objects = models.GeoManager()
 
     class Meta:
-        db_table = u'buildmeabikerack_neighborhoods'
+        db_table = u'gis_neighborhoods'
 
 
 

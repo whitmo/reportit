@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     # Example:
     (r'^$', 'py.buildmeabikerack.views.index'), 
     (r'^rack/(?P<rack_id>\d+)/$', 'py.buildmeabikerack.views.rack'),                        
+    (r'rack/all.kml$', 'py.buildmeabikerack.views.rack_all_kml'),
     (r'^rack/new/$', 'py.buildmeabikerack.views.newrack'), 
 
                        

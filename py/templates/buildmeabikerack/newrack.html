@@ -50,24 +50,10 @@ window.onload = function(){
 {% block content %} 
 <div class="span-24" id="newrack"> 
   <h2>you are adding a new bike rack </h2> 
-  <h3> choose a location </h3> 
-  <div id="location-rack-map" class="span-24"> 
-  </div>
- <hr /> 
+  <hr /> 
   <form id="newrack" action="." method="post">
-
-    <div class="formwrapper"> 
-      {{from.date}} 
-    </div>
-
-    <div class="formwrapper">
-     {{ form.date }} 
-    </div>
-    <div class="formwrapper"> 
-      {{form.meta}}
-    </div>
-
-    <input type="submit" value="Submit" />
+    {{form.as_p}}
+    <input type="submit" />
   </form>
 
 

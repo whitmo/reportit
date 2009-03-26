@@ -7,6 +7,7 @@ from django.contrib.gis.geos import GEOSGeometry, fromstr
 
 from django.core.mail import send_mail
 
+from django.contrib.gis.shortcuts import render_to_kml
 
 from py.buildmeabikerack.models import Rack 
 from py.buildmeabikerack.models import Neighborhoods
@@ -26,7 +27,6 @@ def index(request):
 def newrack(request):         
     if request.method == 'POST': 
         form = RackForm(request.POST)
-        form.location = fromstr('POINT(73 43)', srid=4326)
         if form.is_valid(): 
             new_rack = form.save()
             return HttpResponseRedirect('/thanks')
@@ -43,6 +43,10 @@ def rack(request,rack_id):
     return render_to_response('buildmeabikerack/rack.html', { 
             'rack_query': rack_query,            
             })
+
+def rack_all_kml(requst): 
+    racks = Rack.objects.all()
+    return render_to_kml("placemarkers.kml", {'racks' : racks}) 
 
 
 def neighborhoods(request): 
