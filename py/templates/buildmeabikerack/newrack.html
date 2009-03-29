@@ -24,12 +24,8 @@
 	var wkt  = 'POINT({{lng}} {{lat}})' ;
 	var features   = wkt_f.read(wkt) ;
 	vectors.addFeatures(features);
-
-	var lonlat = features.geometry.getBounds().getCenterLonLat(); 
 	
-	document.getElementById("location").appendChild(lonlat)	
 	
-	location.append.value(lonlat)
 
         map.addLayers([layer,vectors]);
 	map.setCenter(new OpenLayers.LonLat(-73.94,40.63),10); 
@@ -39,6 +35,10 @@
 	var dragFeature = new OpenLayers.Control.DragFeature(vectors)
 	map.addControl(dragFeature); 
 	dragFeature.activate(); 
+
+	var lonlat = features.geometry.getBounds().getCenterLonLat(); 
+	document.getElementById('location').innerHTML = lonlat 
+	document.getElementById('location').value = lonlat 
 	
 
         }
@@ -83,7 +83,7 @@ window.onload = function(){
       </div>
       {{form.location.errors}}
       <p id="location"> </p>
-      <input type="text" name="location" value="POINT({{lng}} {{lat}})" />
+      <input type="text" name="location" id="location" value="" />
     </div>
     {{form.meta.errors}} 
     {{form.meta}}
