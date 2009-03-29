@@ -15,8 +15,9 @@ urlpatterns = patterns('',
    
     (r'rack/all.kml$', 'py.buildmeabikerack.views.rack_all_kml'),
     (r'rack/(?P<rack_id>\d+).kml', 'py.buildmeabikerack.views.rack_all_kml'),
-    (r'^rack/new/$', 'py.buildmeabikerack.views.newrack'), 
 
+    (r'^rack/new/$', 'py.buildmeabikerack.views.newrack_form'), 
+    (r'^rack/add/$', 'py.buildmeabikerack.views.newrack_add'), 
                        
     (r'^neighborhoods/$', 'py.buildmeabikerack.views.neighborhoods'), 
 

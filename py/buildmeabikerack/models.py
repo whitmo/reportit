@@ -8,7 +8,7 @@ from django.forms import ModelForm
 class Rack(models.Model): 
     location = models.PointField(srid=4326)
     date = models.DateTimeField()    
-    location_meta = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
     meta = models.TextField()
     contact_email = models.EmailField()
     STATUS_STATE  = ( 

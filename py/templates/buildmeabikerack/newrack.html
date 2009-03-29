@@ -4,11 +4,11 @@
 {% block header %} 
 
 
-<script src="http://openlayers.org/dev/OpenLayers.js"></script>
+<script src="http://localhost/openlayers/OpenLayers.js"></script>
 <script defer="defer" type="text/javascript">
         var map, layer;
         function init(){
-	map = new OpenLayers.Map('new-bike-rack');
+	map = new OpenLayers.Map('request-map');
 
         layer = new OpenLayers.Layer.WMS( "OpenStreetMap", 
         [
@@ -25,8 +25,22 @@
 	var features   = wkt_f.read(wkt) ;
 	vectors.addFeatures(features);
 
+	var lonlat = features.geometry.getBounds().getCenterLonLat(); 
+	
+	document.getElementById("location").appendChild(lonlat)	
+	
+	location.append.value(lonlat)
+
         map.addLayers([layer,vectors]);
 	map.setCenter(new OpenLayers.LonLat(-73.94,40.63),10); 
+	
+
+
+	var dragFeature = new OpenLayers.Control.DragFeature(vectors)
+	map.addControl(dragFeature); 
+	dragFeature.activate(); 
+	
+
         }
 </script>    
 
@@ -63,10 +77,29 @@ window.onload = function(){
   <h2>You are adding a new bike rack request</h2> 
   <hr /> 
 
-  <form id="newrack" action="." method="post">
-    <div id="new-bike-rack">       
+  <form id="newrack" action="/rack/add/" method="post">
+    <div id="request-map-con">
+      <div id="request-map">       
+      </div>
+      {{form.location.errors}}
+      <p id="location"> </p>
+      <input type="text" name="location" value="POINT({{lng}} {{lat}})" />
     </div>
-    {{form.as_p}}
+    {{form.meta.errors}} 
+    {{form.meta}}
+
+    {{form.date.errors}} 
+    {{form.date}} 
+
+    {{form.address.errors}} 
+    <input type="text" name="address" value="{{address}}" />
+    
+    {{form.contact_email.errors}}
+    {{form.contact_email}}
+
+    {{form.status.errors}}
+    {{form.status}}
+
     <input type="submit" />
   </form>
 

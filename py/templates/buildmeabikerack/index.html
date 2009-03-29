@@ -3,7 +3,7 @@
 
 {% block header %} 
 
-<script src="http://openlayers.org/dev/OpenLayers.js"></script>
+<script src="http://localhost/openlayers/OpenLayers.js"></script>
 <script defer="defer" type="text/javascript">
         var map, layer;
         function init(){
@@ -22,6 +22,7 @@
         {format: OpenLayers.Format.KML}); 
 
         map.addLayers([layer,kml]);
+
 	map.setCenter(new OpenLayers.LonLat(-73.94,40.63),10); 
         }
 </script>    
@@ -41,7 +42,6 @@ window.onload = function(){
 <div id="header">
   <ul id="menu" class="span-20"> 
     <li class="active"><a href="/">index</a></li> 
-    <li><a href="/rack/new/">add new rack request</a></li> 
     <li><a href="/neighborhoods/">view requests by neighborhoods</a></li> 
     <li><a href="/dataview">view requests by community board</a></li> 
   </ul>
@@ -54,35 +54,31 @@ window.onload = function(){
 
 {% block content %} 
 
-<div id="feeds"> 
-<h2>feeds</h2>
- <hr /> 
-   <div> 
-      <h3>request a rack</h3> 
+<div id="feeds-con"> 
+   <div class="feeds"> 
+      <h3>Request a rack</h3> 
       	  <form action="rack/new/" method="get"> 
-	    <p> address of a rack </p>
+	    <p> Address of a rack. Example <strong><a href="rack/new/?address=Brooklyn%2C+NY%2C+11238">Brooklyn, NY, 11238</a></strong></p>
 	     <input type="text"  name="address" /> 
-	    <input type="submit"> 
+	    <input type="submit" value="Find location by address"> 
 	  </form>
-
-      <hr />
+	  <h3> Recently requested racks </h3>
       <ul id="feed"> 
       {% for rack in recent_request %} 
         <li>
-	  <h4><a href="rack/{{rack.id}}/">{{rack.location_meta}}</a> </h4>
+	  <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4>
 	  <p> {{rack.date}}</p>
 	  <p> {{rack.meta|truncatewords:20}}</p>
 	</li>
       {% endfor %}
       </ul>
    </div>
-   <div> 
-     <h3>pending bike racks</h3>
-     <hr />
+
+   <div class="feeds"> 
+     <h3>Pending bike racks</h3>
    </div>
-   <div> 
-     <h3>built bike racks</h3> 
-     <hr />
+   <div class="feeds"> 
+     <h3>Built bike racks</h3> 
    </div>
 </div>
 <div>

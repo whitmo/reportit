@@ -14,25 +14,16 @@ from geopy import geocoders
 def index(request):
     if request.method == 'GET':
         recent_request = Rack.objects.all()
-        return render_to_response('buildmeabikerack/index.html', {'recent_request': recent_request})
-    
+        return render_to_response('buildmeabikerack/index.html', {'recent_request': recent_request})    
     elif request.method == 'POST': 
+        return HttpResponse("index,post request")
 
-        return HttpResponse("index, POST")
 
-
-def newrack(request):         
-    if request.method == 'POST':         
-        form = RackForm(request.POST)
-        if form.is_valid(): 
-            new_rack = form.save()
-            return HttpResponseRedirect('/')
-    else: 
-        address = request.GET['address']
-        g = geocoders.GeoNames()
-        place, (lat, lng) = g.geocode(address)        
-        form = RackForm()
-
+def newrack_form(request):         
+    address = request.GET['address']
+    g = geocoders.Google()
+    place, (lat, lng) = g.geocode(address)        
+    form = RackForm()
     return render_to_response('buildmeabikerack/newrack.html', { 
             'form': form,
             'address': place, 
@@ -40,6 +31,15 @@ def newrack(request):
             'lng': lng,
            })
 
+
+
+def newrack_add(request): 
+    form = RackForm(request.POST)
+    if form.is_valid(): 
+        new_rack = form.save()
+        return HttpResponseRedirect('/') 
+    else: 
+        return HttpResponseRedirect('/error/ ') 
 
 def rack(request,rack_id): 
     rack_query = Rack.objects.filter(id=rack_id)    
