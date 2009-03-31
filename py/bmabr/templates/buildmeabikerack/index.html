@@ -1,0 +1,153 @@
+{% extends "buildmeabikerack/base.html" %} 
+{% block title %} buildmeabikerack - home {% endblock %} 
+
+{% block header %} 
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ">
+</script>
+
+<script src="http://localhost/openlayers/OpenLayers.js"></script>
+<script defer="defer" type="text/javascript">
+    var map, layer, select;
+            var options = {
+            projection: new OpenLayers.Projection("EPSG:900913"),
+	    displayProjection: new OpenLayers.Projection("EPSG:4326"),
+	    units: "m",
+	    maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+					     20037508.34, 20037508.34)
+	   };
+
+        function init(){
+	    map = new OpenLayers.Map('index-map',options);
+
+
+
+	var gphy = new OpenLayers.Layer.Google(
+                "Google Physical",
+                {type: G_PHYSICAL_MAP, 
+	         sphericalMercator: true
+	       }
+            );
+
+	var style = new OpenLayers.Style({
+                    pointRadius: "${radius}",
+		    fillColor: "#be7cb1",
+                    strokeColor: "#8147ad",
+                    strokeWidth: 2,
+                    strokeOpacity: 0.8
+		    
+                }, {
+                    context: {
+                        radius: function(feature) {
+                            return Math.min(feature.attributes.count, 7) + 5;
+                        }
+                    }
+                });
+
+	var racks = new OpenLayers.Layer.Vector("Racks", {
+		    projection: map.displayProjection,
+                    strategies: [
+                        new OpenLayers.Strategy.Fixed(),
+                        new OpenLayers.Strategy.Cluster()
+                    ],
+		  
+                    protocol: new OpenLayers.Protocol.HTTP({
+                        url: "./rack/all.kml",
+                        params: {		     
+                        },
+                        format: new OpenLayers.Format.KML()
+                    }),
+                    styleMap: new OpenLayers.StyleMap({
+                        "default": style,
+                        "select": {
+                            fillColor: "#8aeeef",
+                            strokeColor: "#32a8a9"
+                        }
+                    })
+
+                });
+
+
+        map.addLayers([gphy,racks]);
+	var center = new OpenLayers.LonLat(-73.94,40.63);  
+	center.transform(map.displayProjection, map.projection)
+	map.setCenter(center,10)
+
+        }
+
+
+
+</script>    
+
+
+<script defer="defer" type="text/javascript">
+window.onload = function(){
+  init() ;
+}
+</script>
+
+
+{% endblock %}
+
+
+{% block content %} 
+
+<div id="feeds-con"> 
+   <div class="feeds"> 
+      <h3>Request a rack</h3> 
+      	  <form action="rack/new/" method="get"> 
+	    <p> Address of a rack. Example <strong><a href="rack/new/?address=Brooklyn%2C+NY%2C+11238">Brooklyn, NY, 11238</a></strong></p>
+	     <input type="text"  name="address" /> 
+	    <input type="submit" value="Find location by address"> 
+	  </form>
+	  <h3> Recently requested racks </h3>
+      <ul class="feed"> 
+      {% for rack in requested_racks %} 
+        <li>
+	  <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4>
+	  <p> {{rack.date}}</p>
+	  <p> {{rack.meta|truncatewords:20}}</p>
+	</li>
+      {% endfor %}
+	<a href="#">More rack requests </a>
+      </ul>
+   </div>
+   <div class="arrow"> </div>
+   <div class="feeds"> 
+     <h3>Pending bike racks</h3>
+     <ul class="feed">
+     {% for rack in assessment_racks %} 
+     <li> 
+       <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4> 
+       <p> {{rack.date}} </p> 
+       <p> {{rack.meta|truncatewords:20}} </p>       
+     </li>
+     {% endfor %} 
+     <a href="#">More pending bike racks</a>
+     </ul>
+   </div>
+   <div class="arrow"> </div>
+   <div class="feeds"> 
+     <h3>Built bike racks</h3> 
+     <ul class="feed">
+     {% for rack in built_racks %} 
+     <li> 
+       <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4> 
+       <p> {{rack.date}} </p> 
+       <p> {{rack.meta|truncatewords:20}} </p>       
+     </li>
+     {% endfor %} 
+     <a href="#"> More built bike racks </a>
+     </ul>
+   </div>
+</div>
+<div>
+  <div id="index-map"> 
+  </div>
+  <h3>Download and view in <a href="rack/all.kml">Google Earth</a></h3>
+</div>
+
+
+{% endblock %} 
+
+
+

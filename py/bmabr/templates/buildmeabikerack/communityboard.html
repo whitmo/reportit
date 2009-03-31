@@ -1,0 +1,36 @@
+{% extends "buildmeabikerack/base.html" %}
+{% block title %} buildmeabikerack - community board  {% endblock %}
+
+{% block header %} 
+
+
+
+{% endblock %}
+
+{% block menu %}
+<div id="header">
+  <ul id="menu" class="span-20">
+    <li><a href="/">index</a></li>
+    <li><a href="/neighborhoods/">view requests by neighborhoods</a></li>
+    <li class="active"><a href="/communityboard/">view requests by community board</a></li>
+  </ul>
+  <div id="login-control" class="span-20">
+  </div>
+</div>
+<hr />
+<div> 
+    {% for community_board in communityboard_list  %} 
+    <h2>Community Board {{community_board.name}}</h2>    
+    <h4>{{community_board.neighborhoods}}</h4>     
+    {% endfor %}
+
+  </div>
+
+
+
+{% endblock %}
+
+
+
+
+

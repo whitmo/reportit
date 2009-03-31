@@ -1,0 +1,38 @@
+{% extends "buildmeabikerack/base.html" %} 
+{% block title %} buildmeabikerack -  {% endblock %} 
+
+{% block header %} 
+
+
+{% endblock %}
+
+
+{% block menu %} 
+<div id="header">
+  <ul id="menu" class="span-20"> 
+    <li><a href="/"> index</a></li> 
+    <li><a href="/neighborhoods/">view requests by neighborhoods</a></li> 
+    <li><a href="/dataview">view requests by community board</a></li> 
+  </ul>
+  <div id="login-control" class="span-20">     
+  </div>
+
+</div>
+<hr />
+{% endblock %} 
+
+{% block content %} 
+
+{% for rack in rack_query %} 
+<div id="overview-map"> 
+<h2>map</h2>
+</div>
+<h2>{{rack.address}}</h2>
+<p>{{rack.date}}</p>
+<p> {{rack.meta}} </p>
+{% endfor %} 
+
+{% endblock %} 
+
+
+
