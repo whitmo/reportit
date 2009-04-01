@@ -1,8 +1,7 @@
 from django.contrib.gis.db import models
 from django.forms import ModelForm
-
-
 # Create your models here.
+
 
 
 class Rack(models.Model): 

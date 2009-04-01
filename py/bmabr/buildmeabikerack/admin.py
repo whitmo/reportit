@@ -4,22 +4,23 @@ from bmabr.buildmeabikerack.models import Neighborhoods
 from bmabr.buildmeabikerack.models import CommunityBoard
 
 
-from django.contrib import admin 
+from django.contrib.gis import admin
 
 
 
-class RackAdmin(admin.ModelAdmin): 
+
+class RackAdmin(admin.GeoModelAdmin): 
     list_display = ('address','location')
 
 admin.site.register(Rack, RackAdmin)
 
-class NeighborhoodsAdmin(admin.ModelAdmin): 
+class NeighborhoodsAdmin(admin.GeoModelAdmin): 
     list_display = ('name','county')
 
 admin.site.register(Neighborhoods,NeighborhoodsAdmin)
 
 
-class CommunityBoardAdmin(admin.ModelAdmin): 
+class CommunityBoardAdmin(admin.GeoModelAdmin): 
     list_display = ('name','gid')
 
 admin.site.register(CommunityBoard,CommunityBoardAdmin)
