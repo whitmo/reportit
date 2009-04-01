@@ -109,7 +109,7 @@ window.onload = function(){
 
 {% block content %} 
 <div id="newrack"> 
-  <h2>You are adding a new bike rack at {{address}}</h2> 
+  <h2>New Rack Request</h2> 
   <form id="newrack" action="/rack/add/" method="post">
     <div class="form-header"> 
       <div id="request-map-con">
@@ -119,14 +119,15 @@ window.onload = function(){
 	<textarea id="location" name="location"></textarea>
       </div>
     </div>
-    {{form.meta.errors}} 
+    <h3>Address</h3>
+    <input type="text" name="address" value="{{address}}" />    
+    <h3>Description</h3>
     {{form.meta}}
     <hr />
     {{form.date.errors}} 
     {{form.date}} 
 
-    {{form.address.errors}} 
-    <input type="text" name="address" value="{{address}}" />
+
     
     {{form.contact_email.errors}}
     {{form.contact_email}}
