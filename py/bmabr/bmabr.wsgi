@@ -1,6 +1,6 @@
 import os, sys
-sys.path.append('/usr/local/reportit')
-os.environ['DJANGO_SETTINGS_MODULE'] = 'py.settings'
+sys.path.append('/home/ivan/development/bmabr/reportit/py/bmabr')
+os.environ['DJANGO_SETTINGS_MODULE'] = 'bmabr.settings'
 
 import django.core.handlers.wsgi
 

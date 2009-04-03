@@ -1,36 +1,94 @@
 {% extends "buildmeabikerack/base.html" %} 
-{% block title %} buildmeabikerack -  {% endblock %} 
+{% block title %} fixcity - overview page  {% endblock %} 
 
 {% block header %} 
+
+<script src="http://localhost/openlayers/OpenLayers.js"></script>
+<script defer="defer" type="text/javascript">
+    var map, layer, select;
+    var options = {
+            projection: new OpenLayers.Projection("EPSG:900913"),
+	    displayProjection: new OpenLayers.Projection("EPSG:4326"),
+	    units: "m",
+	    numZoomLevels:19,
+            maxResolution: 156543.03390625,
+	    maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+					     20037508.34, 20037508.34)
+	   };
+
+        function init(){
+	map = new OpenLayers.Map('overview-map',options);
+
+	var osm = new OpenLayers.Layer.WMS(
+                 "OpenStreetMap",
+                 "http://maps.opengeo.org/geoserver/gwc/service/wms",   
+       {
+            layers: "openstreetmap", 
+            format: "image/png",
+            bgcolor: '#A1BDC4'
+            }, 
+            {wrapDateLine: true} 
+        );
+
+    {% for rack in rack_query %} 
+        var rack = new OpenLayers.Layer.Vector("Racks", {
+                    projection: map.displayProjection,
+
+                    strategies: [
+                        new OpenLayers.Strategy.Fixed(),
+                    ],  
+
+                    protocol: new OpenLayers.Protocol.HTTP({
+                        url: "./rack/{{rack.id}}.kml",
+                    params: {         
+                        },
+                        format: new OpenLayers.Format.KML()
+                    }),
+                });
+    {% endfor %} 
+
+
+    map.addLayers([osm,rack]);
+    var center = new OpenLayers.LonLat(-73.94,40.63);  
+    center.transform(map.displayProjection, map.projection)
+    map.setCenter(center,10)
+}
+
+</script>    
+
+
+<script defer="defer" type="text/javascript">
+window.onload = function(){
+  init() ;
+}
+</script>
 
 
 {% endblock %}
 
 
-{% block menu %} 
-<div id="header">
-  <ul id="menu" class="span-20"> 
-    <li><a href="/"> index</a></li> 
-    <li><a href="/neighborhoods/">view requests by neighborhoods</a></li> 
-    <li><a href="/dataview">view requests by community board</a></li> 
-  </ul>
-  <div id="login-control" class="span-20">     
-  </div>
-
-</div>
-<hr />
-{% endblock %} 
-
 {% block content %} 
 
 {% for rack in rack_query %} 
-<div id="overview-map"> 
-<h2>map</h2>
-</div>
+<div id="overview-map"> </div>
+<div id="overview-about">
 <h2>{{rack.address}}</h2>
+<p> <a href="/rack/{{rack.id}}.kml">Download rack request as kml</a></p>
 <p>{{rack.date}}</p>
 <p> {{rack.meta}} </p>
+</div>
 {% endfor %} 
+<hr />
+
+<div id="overview-comment">
+<h3>Comments</h3>
+<form 
+<ul class="comments"> 
+{% for comment in comment_query %} 
+   <li>{{comment.text}} </li>
+{% endfor %} 
+</ul>
+</div>
 
 {% endblock %} 
 

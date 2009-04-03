@@ -13,8 +13,15 @@ urlpatterns = patterns('',
     (r'^$', 'bmabr.buildmeabikerack.views.index'), 
     (r'^rack/(?P<rack_id>\d+)/$', 'bmabr.buildmeabikerack.views.rack'),                        
    
+
+     # KML URL 
+
     (r'rack/all.kml$', 'bmabr.buildmeabikerack.views.rack_all_kml'),
-    (r'rack/(?P<rack_id>\d+).kml', 'bmabr.buildmeabikerack.views.rack_all_kml'),
+    (r'rack/requested.kml$', 'bmabr.buildmeabikerack.views.rack_requested_kml'),
+    (r'rack/pendding.kml$', 'bmabr.buildmeabikerack.views.rack_pendding_kml'),
+    (r'rack/built.kml$', 'bmabr.buildmeabikerack.views.rack_pendding_kml'),
+
+    (r'rack/(?P<rack_id>\d+).kml', 'bmabr.buildmeabikerack.views.rack_by_id_kml'),
 
     (r'^rack/new/$', 'bmabr.buildmeabikerack.views.newrack_form'), 
     (r'^rack/add/$', 'bmabr.buildmeabikerack.views.newrack_add'), 

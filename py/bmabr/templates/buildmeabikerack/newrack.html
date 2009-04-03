@@ -2,11 +2,6 @@
 {% block title %} fixcity - add new rack {% endblock %} 
 
 {% block header %} 
-
-
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ">
-</script>
-
 <script src="http://localhost/openlayers/OpenLayers.js"></script>
 <script defer="defer" type="text/javascript">
         var map, layer;
@@ -14,6 +9,8 @@
             projection: new OpenLayers.Projection("EPSG:900913"),
 	    displayProjection: new OpenLayers.Projection("EPSG:4326"),
 	    units: "m",
+	    numZoomLevels:20,
+	    maxResolution: 156543.03390625,
 	    maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
 					     20037508.34, 20037508.34)
 	   };
@@ -23,16 +20,17 @@
         function init(){
 	map = new OpenLayers.Map('request-map',options);
        
-
-	var gphy = new OpenLayers.Layer.Google(
-                "Google Physical",
-                {
-	         type: G_PHYSICAL_MAP, 
-	         numZoomLevels: 20,
-	         sphericalMercator: true
-	       }
-            );
-
+	var osm = new OpenLayers.Layer.WMS(
+                 "OpenStreetMap",
+                 "http://maps.opengeo.org/geoserver/gwc/service/wms",   
+	 {
+             layers: "openstreetmap", 
+             format: "image/png",
+             bgcolor: '#A1BDC4'
+             }, 
+             {wrapDateLine: true} 
+          );
+    
 	var location_wkt = "POINT({{lng}} {{lat}})"; 
 	console.log(location_wkt); 
 	document.getElementById('location').innerHTML = location_wkt ; 
@@ -57,12 +55,12 @@
 	    }); 
 
 
-        map.addLayers([gphy]);
+        map.addLayers([osm]);
 
 	var center = new OpenLayers.LonLat({{lng}},{{lat}});  
 	center.transform(map.displayProjection, map.projection)
 	console.log(center); 
-	map.setCenter(center,15)
+	map.setCenter(center,18)
        
         }
 </script>    
@@ -77,7 +75,15 @@ window.onload = function(){
 </script>
 {% endblock %} 
 
-{% block content %} 
+{% block content %}
+
+
+<p><strong>Did you mean? </strong> (Current rack requests within .5 km)</p>
+{% for rack in close_racks %} 
+ <span><a href="/rack/{{rack.id}}">{{rack.address}}</a></span>
+{% endfor %} 
+ 
+<hr />
 <div id="newrack"> 
   <h2>New Rack Request</h2> 
   <form id="newrack" action="/rack/add/" method="post">
@@ -94,17 +100,16 @@ window.onload = function(){
     <input type="text" name="address" value="{{address}}" />    
     <h3>Description</h3>
     {{form.meta}}
-    <hr />
     <div class="form-body">    
       <h3> Date </h3>
       <input type="text" name="date" id="id_date" value="{% now "m/d/y" %}"/>     
       <h3>Contact email</p>
-    {{form.contact_email}}
-
-    <select name="status" id="id_status">
-      <option value="r">requested</option>
-    </select>
-
+          {{form.contact_email}}
+      <h3>Photo</h3> 
+         {{form.photo}}
+       <select name="status" id="id_status">
+	  <option value="r">requested</option>
+        </select>
     </div>
     
     <input type="submit" />

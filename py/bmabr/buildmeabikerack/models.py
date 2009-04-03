@@ -1,6 +1,5 @@
 from django.contrib.gis.db import models
 from django.forms import ModelForm
-# Create your models here.
 
 
 
@@ -17,11 +16,24 @@ class Rack(models.Model):
         ('n','not built')
                       
     )
+    photo = models.ImageField(upload_to='images/racks/', blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS_STATE)
     objects = models.GeoManager()
 
     class Meta:
         ordering = ['date']
+
+    def __unicode__(self):
+        return self.address
+
+
+
+
+class Comment(models.Model):
+      text = models.TextField()
+      contact_email = models.EmailField()
+      rack = models.ForeignKey(Rack)
+
 
 
 class Neighborhoods(models.Model):
@@ -36,6 +48,9 @@ class Neighborhoods(models.Model):
 
     class Meta:
         db_table = u'gis_neighborhoods'
+        
+    def __unicode__(self):
+        return self.name
 
 
 class  CommunityBoard(models.Model):
@@ -43,10 +58,10 @@ class  CommunityBoard(models.Model):
     borocd = models.IntegerField()
     the_geom = models.MultiPolygonField()
     name = models.IntegerField()
-    neighborhoods = models.CharField(max_length=100)
-    population_1980 = models.IntegerField()
-    population_1990 = models.IntegerField()
-    population_2000 = models.IntegerField()
+    neighborhoods = models.ManyToManyField(Neighborhoods)
+    population_1980 = models.IntegerField(blank=True, null=True)
+    population_1990 = models.IntegerField(blank=True, null=True)
+    population_2000 = models.IntegerField(blank=True, null=True)
     borough = models.CharField(max_length=20)
     objects = models.GeoManager()
     class Meta:

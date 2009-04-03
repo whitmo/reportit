@@ -1,36 +1,38 @@
 {% extends "buildmeabikerack/base.html" %} 
-{% block title %} buildmeabikerack - home {% endblock %} 
+{% block title %} fixcity.org {% endblock %} 
 
 {% block header %} 
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ">
-</script>
 
 <script src="http://localhost/openlayers/OpenLayers.js"></script>
 <script defer="defer" type="text/javascript">
     var map, layer, select;
-            var options = {
+    var options = {
             projection: new OpenLayers.Projection("EPSG:900913"),
 	    displayProjection: new OpenLayers.Projection("EPSG:4326"),
 	    units: "m",
+	    numZoomLevels:19,
+            maxResolution: 156543.03390625,
 	    maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
 					     20037508.34, 20037508.34)
 	   };
 
         function init(){
-	    map = new OpenLayers.Map('index-map',options);
+	map = new OpenLayers.Map('index-map',options);
 
-
-
-	var gphy = new OpenLayers.Layer.Google(
-                "Google Physical",
-                {type: G_PHYSICAL_MAP, 
-	         sphericalMercator: true
-	       }
-            );
-
+	var osm = new OpenLayers.Layer.WMS(
+                 "OpenStreetMap",
+                 "http://maps.opengeo.org/geoserver/gwc/service/wms",   
+       {
+            layers: "openstreetmap", 
+            format: "image/png",
+            bgcolor: '#A1BDC4'
+            }, 
+            {wrapDateLine: true} 
+        );
+    
 	var style = new OpenLayers.Style({
                     pointRadius: "${radius}",
-		    fillColor: "#be7cb1",
+		    fillColor: "#DFABAB",
                     strokeColor: "#8147ad",
                     strokeWidth: 2,
                     strokeOpacity: 0.8
@@ -43,16 +45,17 @@
                     }
                 });
 
+
 	var racks = new OpenLayers.Layer.Vector("Racks", {
 		    projection: map.displayProjection,
                     strategies: [
                         new OpenLayers.Strategy.Fixed(),
                         new OpenLayers.Strategy.Cluster()
-                    ],
-		  
+                    ],		  
                     protocol: new OpenLayers.Protocol.HTTP({
-                        url: "./rack/all.kml",
+                        url: "./rack/requested.kml",
                         params: {		     
+				
                         },
                         format: new OpenLayers.Format.KML()
                     }),
@@ -65,9 +68,8 @@
                     })
 
                 });
-
-
-        map.addLayers([gphy,racks]);
+    
+        map.addLayers([osm,racks]);
 	var center = new OpenLayers.LonLat(-73.94,40.63);  
 	center.transform(map.displayProjection, map.projection)
 	map.setCenter(center,10)
@@ -75,9 +77,7 @@
         }
 
 
-
-</script>    
-
+</script>
 
 <script defer="defer" type="text/javascript">
 window.onload = function(){
@@ -100,7 +100,7 @@ window.onload = function(){
 	    <input type="submit" value="Find location by address"> 
 	  </form>
 	  <h3> Recently requested racks </h3>
-      <ul class="feed"> 
+      <ul class="feed request"> 
       {% for rack in requested_racks %} 
         <li>
 	  <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4>
@@ -114,7 +114,7 @@ window.onload = function(){
    <div class="arrow"> </div>
    <div class="feeds"> 
      <h3>Pending bike racks</h3>
-     <ul class="feed">
+     <ul class="feed pendding">
      {% for rack in assessment_racks %} 
      <li> 
        <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4> 
@@ -128,7 +128,7 @@ window.onload = function(){
    <div class="arrow"> </div>
    <div class="feeds"> 
      <h3>Built bike racks</h3> 
-     <ul class="feed">
+     <ul class="feed built">
      {% for rack in built_racks %} 
      <li> 
        <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4> 
