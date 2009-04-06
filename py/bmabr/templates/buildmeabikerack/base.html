@@ -4,9 +4,9 @@
   <head>
 `  <title>{% block title %} {% endblock %}</title> 
      <!-- Framework CSS -->
-     <link rel="stylesheet" href="http://localhost/blueprint/screen.css" type="text/css" media="screen, projection">
-     <link rel="stylesheet" href="http://localhost/blueprint/build-me-a-bike-rack.css" type="text/css" media=" screen, projection">
-     <!--[if IE]><link rel="stylesheet" href="http://buildmeabikerack.com/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+     <link rel="stylesheet" href="/site_media/blueprint/screen.css" type="text/css" media="screen, projection">
+     <link rel="stylesheet" href="/site_media/bmabr.css" type="text/css" media=" screen, projection">
+     <!--[if IE]><link rel="stylesheet" href="site_media/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
 
      {% block header %} 
 
@@ -16,20 +16,14 @@
   </head>
   <body>
    <div class="container">
-     <h1><a class="title" href="/">FIXCITY.COM</a></h1>
+     <h1><a class="title" href="/">BUILD ME A BIKE RACK</a> beta</h1>
      <div id="header">
-       <ul id="menu">
-	 <li class="active"><a href="/">HOME</a></li>
-	 <li><a href="/neighborhoods/">NEIGHBORHOODS</a></li>
-	 <li><a href="/communityboard/">COMMUNITY BOARDS</a></li>
-       </ul>
-       <div id="login-control">
-       </div>       
+     {% block menu %}
+     {% endblock %}
      </div>
-     <hr />
-
-    {% block content %}{% endblock %}
-    {% block footer %}{% endblock %} 
+     <div class="content">
+       {% block content %}{% endblock %}
+     </div>
    </div>
   </body>
 </html> 

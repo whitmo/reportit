@@ -66,6 +66,30 @@ window.onload = function(){
 
 {% endblock %}
 
+{% block menu %} 
+<ul id="menu">
+  <li>
+    <a href="/">(1) REQUEST</a>
+    <p> Request a bike rack </p>
+  </li>
+  <li class="arrow"> </li>
+  <li class="active">
+    <a href="/assess/">(2) ASSESS</a>
+    <p> Assess current requested locations </p>
+  </li>
+  <li class="arrow"> </li>
+  <li>
+    <a href="/submit/">(3) SUBMIT</a>
+    <p> Submit your request to the DOT </p>
+  </li>
+  <li class="arrow"> </li>
+  <li>
+    <a href="/built/"> (4) BUILT</a>
+    <p> See racks aready built </p>
+  </li>
+</ul>
+
+{% endblock %} 
 
 {% block content %} 
 
@@ -77,15 +101,32 @@ window.onload = function(){
 <p>{{rack.date}}</p>
 <p> {{rack.meta}} </p>
 </div>
-{% endfor %} 
 <hr />
 
 <div id="overview-comment">
 <h3>Comments</h3>
-<form 
+
+<form action="/comment/add/" method="post"> 
+<p> Leave a comment about this rack request </p>
+<textarea name="text"> </textarea> <br />
+<p>Contact email </p>
+<input type="text" name="contact_email" />
+<select name="rack" id="id_rack">
+<option value="{{rack.id}}"></option>
+</select>
+<input type="submit" value="Add a comment"/>
+</form>
+
+<hr />
+{% endfor %} 
+<a name="comments"> </a>
 <ul class="comments"> 
 {% for comment in comment_query %} 
-   <li>{{comment.text}} </li>
+   <li>
+     <p> {{comment.text}}</p>
+     <p>{{comment.contact_email}}</p>
+   </li>
+
 {% endfor %} 
 </ul>
 </div>

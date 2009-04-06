@@ -2,7 +2,7 @@
 {% block title %} fixcity - add new rack {% endblock %} 
 
 {% block header %} 
-<script src="http://localhost/openlayers/OpenLayers.js"></script>
+<script src="/site_media/openlayers/OpenLayers.js"></script>
 <script defer="defer" type="text/javascript">
         var map, layer;
          var options = {
@@ -65,6 +65,18 @@
         }
 </script>    
 
+<script type="text/javascript" src="/site_media/jquery.js"></script>
+<script type="text/javascript">
+ $(document).ready(function() {
+       $("#tip-control").click(function () {
+      $("#tip").toggle();
+    });
+
+ });
+</script>
+
+
+
 
 <script defer="defer" type="text/javascript">
 
@@ -74,48 +86,84 @@ window.onload = function(){
 
 </script>
 {% endblock %} 
-
+{% block menu %} 
+       <ul id="menu">
+	 <li class="active">
+	   <a href="/">(1) REQUEST</a>
+	   <p> Request a bike rack </p>
+	 </li>
+	 <li class="arrow"> </li>
+	 <li>
+	   <a href="/assess/">(2) ASSESS</a>
+	   <p> Assess current requested locations </p>
+	 </li>
+	 <li class="arrow"> </li>
+	 <li>
+	   <a href="/submit/">(3) SUBMIT</a>
+	   <p> Submit your request to the DOT </p>
+	 </li>
+	 <li class="arrow"> </li>
+	 <li>
+	   <a href="/built/"> (4) BUILT</a>
+	   <p> See racks aready built </p>
+	 </li>
+       </ul>
+{% endblock %} 
 {% block content %}
+<div id="page-title">
+  <h2 class="title">Add a rack request</h2>
+     <div id="tip-con"> 
+       <h4><a id="tip-control" href="#">Tips and help</a> click to view</h4>
+       <div id="tip">
+	  <p> Vivamus tincidunt tristique urna. Ut id justo quis nulla gravida feugiat. In hac habitasse platea dictumst. Nam dictum molestie orci. Suspendisse potenti. Nam a odio in nulla ultricies venenatis. Pellentesque ac tellus. Sed dignissim quam vel orci. Proin nulla orci, auctor nec, tempus euismod, consectetur cursus, metus. Curabitur sagittis pellentesque felis. </p>
+       </div> 
+     </div>
+</div>
 
-
-<p><strong>Did you mean? </strong> (Current rack requests within .5 km)</p>
-{% for rack in close_racks %} 
- <span><a href="/rack/{{rack.id}}">{{rack.address}}</a></span>
-{% endfor %} 
- 
-<hr />
 <div id="newrack"> 
-  <h2>New Rack Request</h2> 
   <form id="newrack" action="/rack/add/" method="post">
     <div class="form-header"> 
-      <div id="request-map-con">
-        <p>Click Map to correct rack location</p>
-	<div id="request-map">       
-	</div>
-	<p id="location_log"></p>
-	<textarea id="location" name="location"></textarea>
+      <div id="tip"> 
+	<h3>Tips and help</h3>
+      </div>
+      <div id="map-con">
+          <h3>Click Map to correct rack location</h3>
+	  <div id="request-map">       
+	  </div>
+	  <p id="location_log"></p>
+	  <textarea id="location" name="location"></textarea>
       </div>
     </div>
-    <h3>Address</h3>
-    <input type="text" name="address" value="{{address}}" />    
-    <h3>Description</h3>
-    {{form.meta}}
-    <div class="form-body">    
-      <h3> Date </h3>
-      <input type="text" name="date" id="id_date" value="{% now "m/d/y" %}"/>     
-      <h3>Contact email</p>
-          {{form.contact_email}}
-      <h3>Photo</h3> 
-         {{form.photo}}
-       <select name="status" id="id_status">
+    <div id="activity-con">
+      <div>
+	<p><strong>Did you mean? </strong> (Current rack requests within .5 km)</p>
+	{% for rack in close_racks %} 
+	<ul>
+	  <li><span><a href="/rack/{{rack.id}}">{{rack.address}}</a></span></li>
+	</ul>
+	{% endfor %} 
+      </div>
+      <hr />
+      <h3> Please fill out this form </h3>
+      <h4>Address</h4>
+      <input type="text" name="address" value="{{address}}" />    
+      <h3>Description</h3>
+      {{form.meta}}
+      <div class="form-body">    
+	<h4> Date </h4>
+	<input type="text" name="date" id="id_date" value="{% now "m/d/y" %}"/>     
+	<h4>Contact email</h4>
+        {{form.contact_email}}
+	<h3>Photo</h3> 
+        {{form.photo}}
+	<select name="status" id="id_status">
 	  <option value="r">requested</option>
         </select>
-    </div>
-    
-    <input type="submit" />
+      </div>    
+      <input type="submit" />
   </form>
-
-
+  </div>
+  
 </div>
 {% endblock %} 
 

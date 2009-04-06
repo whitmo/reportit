@@ -3,7 +3,7 @@
 
 {% block header %} 
 
-<script src="http://localhost/openlayers/OpenLayers.js"></script>
+<script src="/site_media/openlayers/OpenLayers.js"></script>
 <script defer="defer" type="text/javascript">
     var map, layer, select;
     var options = {
@@ -17,7 +17,7 @@
 	   };
 
         function init(){
-	map = new OpenLayers.Map('index-map',options);
+	map = new OpenLayers.Map('map',options);
 
 	var osm = new OpenLayers.Layer.WMS(
                  "OpenStreetMap",
@@ -70,83 +70,97 @@
                 });
     
         map.addLayers([osm,racks]);
-	var center = new OpenLayers.LonLat(-73.94,40.63);  
+	var center = new OpenLayers.LonLat(-73.9584, 40.675);  
 	center.transform(map.displayProjection, map.projection)
-	map.setCenter(center,10)
+	map.setCenter(center,15)
 
         }
 
 
 </script>
 
+<script type="text/javascript" src="/site_media/jquery.js"></script>
+<script type="text/javascript">
+ $(document).ready(function() {
+       $("#tip-control").click(function () {
+      $("#tip").toggle();
+    });
+
+ });
+</script>
+
+
+
 <script defer="defer" type="text/javascript">
 window.onload = function(){
   init() ;
 }
 </script>
+{% endblock %}
 
-
+{% block menu %} 
+<ul id="menu">
+  <li class="active">
+    <a href="/">(1) REQUEST</a>
+    <p> Request a bike rack </p>
+  </li>
+  <li class="arrow"> </li>
+  <li>
+    <a href="/assess/">(2) ASSESS</a>
+    <p> Assess current requested locations </p>
+  </li>
+  <li class="arrow"> </li>
+  <li>
+    <a href="/submit/">(3) SUBMIT</a>
+    <p> Submit your request to the DOT </p>
+  </li>
+  <li class="arrow"> </li>
+  <li>
+    <a href="/built/"> (4) BUILT</a>
+    <p> See racks aready built </p>
+  </li>
+</ul>
 {% endblock %}
 
 
 {% block content %} 
-
-<div id="feeds-con"> 
-   <div class="feeds"> 
-      <h3>Request a rack</h3> 
-      	  <form action="rack/new/" method="get"> 
-	    <p> Address of a rack. Example <strong><a href="rack/new/?address=Brooklyn%2C+NY%2C+11238">Brooklyn, NY, 11238</a></strong></p>
-	     <input type="text"  name="address" /> 
-	    <input type="submit" value="Find location by address"> 
-	  </form>
-	  <h3> Recently requested racks </h3>
-      <ul class="feed request"> 
-      {% for rack in requested_racks %} 
-        <li>
-	  <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4>
-	  <p> {{rack.date}}</p>
-	  <p> {{rack.meta|truncatewords:20}}</p>
-	</li>
-      {% endfor %}
-	<a href="#">More rack requests </a>
-      </ul>
-   </div>
-   <div class="arrow"> </div>
-   <div class="feeds"> 
-     <h3>Pending bike racks</h3>
-     <ul class="feed pendding">
-     {% for rack in assessment_racks %} 
-     <li> 
-       <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4> 
-       <p> {{rack.date}} </p> 
-       <p> {{rack.meta|truncatewords:20}} </p>       
-     </li>
-     {% endfor %} 
-     <a href="#">More pending bike racks</a>
-     </ul>
-   </div>
-   <div class="arrow"> </div>
-   <div class="feeds"> 
-     <h3>Built bike racks</h3> 
-     <ul class="feed built">
-     {% for rack in built_racks %} 
-     <li> 
-       <h4><a href="rack/{{rack.id}}/">{{rack.address}}</a> </h4> 
-       <p> {{rack.date}} </p> 
-       <p> {{rack.meta|truncatewords:20}} </p>       
-     </li>
-     {% endfor %} 
-     <a href="#"> More built bike racks </a>
-     </ul>
-   </div>
-</div>
-<div>
-  <div id="index-map"> 
+  <div id="page-title">
+    <h2 class="title">Home Page</h2>
+    <div id="tip-con"> 
+      <h3 id="tip-control">Tips and help click to view</h3>
+      <div id="tip">
+	<h4>Lily, we need some tips</h4>
+	<p> Vivamus tincidunt tristique urna. Ut id justo quis nulla gravida feugiat. In hac habitasse platea dictumst. Nam dictum molestie orci. Suspendisse potenti. Nam a odio in nulla ultricies venenatis. Pellentesque ac tellus. Sed dignissim quam vel orci. Proin nulla orci, auctor nec, tempus euismod, consectetur cursus, metus. Curabitur sagittis pellentesque felis. </p>
+      </div> 
+    </div>
   </div>
-  <h3>Download and view in <a href="rack/all.kml">Google Earth</a></h3>
-</div>
-
-
+  <div id="map-con">
+    <h4>Find location by community board</h4>
+    <a href="#">Select by Community Board </a>
+    <div id="cbmenu">
+      {% for comunityboard in communityboard_list %}
+      <a href="#">{{comunityboard.name}}</a>
+      {% endfor %}
+    </div>
+    <div id="map"> 
+    </div>
+  </div>
+  
+  <div id="activity-con">
+    <h3>Welcome to our site</h3>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac sem id justo sodales suscipit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc condimentum iaculis nisl. Aenean id purus ut tellus commodo tincidunt. Praesent orci magna, pulvinar vel, tempus ut, semper et, nibh. Sed erat. Aliquam ornare odio a nulla. Vivamus vel justo id mi sodales fringilla. Integer varius turpis in augue. Maecenas adipiscing tortor at velit. Duis sed nunc at velit sollicitudin elementum. Vivamus sem. Sed commodo. Sed vulputate. Maecenas tempus dapibus lorem. Duis eget enim nec dolor luctus pharetra. Nunc et arcu.</p>
+    <hr />
+    <div id="search-con"> 
+      <h4> Find request location by text search </h4>
+      <div class="search"> 
+	<form action="rack/new/" method="get"> 
+	  <p> Search for location <strong><a href="rack/new/?address=Brooklyn%2C+NY%2C+11238">Brooklyn, NY, 11238</a></strong></p>
+	  <input type="text"  name="address" /> 
+	  <input type="submit" value="Search for location"> 
+	</form>
+      </div> 
+    </div>
+  </div>
 {% endblock %} 
 
 
