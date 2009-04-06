@@ -113,7 +113,7 @@ window.onload = function(){
 <div id="page-title">
   <h2 class="title">Add a rack request</h2>
      <div id="tip-con"> 
-       <h4><a id="tip-control" href="#">Tips and help</a> click to view</h4>
+       <h3 id="tip-control">Tips and help click to view</h3>
        <div id="tip">
 	  <p> Vivamus tincidunt tristique urna. Ut id justo quis nulla gravida feugiat. In hac habitasse platea dictumst. Nam dictum molestie orci. Suspendisse potenti. Nam a odio in nulla ultricies venenatis. Pellentesque ac tellus. Sed dignissim quam vel orci. Proin nulla orci, auctor nec, tempus euismod, consectetur cursus, metus. Curabitur sagittis pellentesque felis. </p>
        </div> 
@@ -123,9 +123,6 @@ window.onload = function(){
 <div id="newrack"> 
   <form id="newrack" action="/rack/add/" method="post">
     <div class="form-header"> 
-      <div id="tip"> 
-	<h3>Tips and help</h3>
-      </div>
       <div id="map-con">
           <h3>Click Map to correct rack location</h3>
 	  <div id="request-map">       
@@ -134,6 +131,7 @@ window.onload = function(){
 	  <textarea id="location" name="location"></textarea>
       </div>
     </div>
+    
     <div id="activity-con">
       <div>
 	<p><strong>Did you mean? </strong> (Current rack requests within .5 km)</p>
@@ -142,6 +140,10 @@ window.onload = function(){
 	  <li><span><a href="/rack/{{rack.id}}">{{rack.address}}</a></span></li>
 	</ul>
 	{% endfor %} 
+	<p><strong> Near by subway stations </strong> </p> 
+	
+	
+
       </div>
       <hr />
       <h3> Please fill out this form </h3>

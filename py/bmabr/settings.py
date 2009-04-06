@@ -66,6 +66,9 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'bmabr.urls'
 
+STATIC_DOC_ROOT = '/home/ivan/development/bmabr/reportit/py/bmabr/media'
+
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.

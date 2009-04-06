@@ -70,7 +70,7 @@
                 });
     
         map.addLayers([osm,racks]);
-	var center = new OpenLayers.LonLat(-73.9584, 40.675);  
+	var center = new OpenLayers.LonLat(-73.956,40.718);  
 	center.transform(map.displayProjection, map.projection)
 	map.setCenter(center,15)
 
@@ -85,17 +85,11 @@
        $("#tip-control").click(function () {
       $("#tip").toggle();
     });
+    init();
 
  });
 </script>
 
-
-
-<script defer="defer" type="text/javascript">
-window.onload = function(){
-  init() ;
-}
-</script>
 {% endblock %}
 
 {% block menu %} 

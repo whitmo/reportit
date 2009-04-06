@@ -12,7 +12,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     (r'^$', 'bmabr.buildmeabikerack.views.index'), 
-    (r'assess/$','bmabr.buildmeabikerack.views.assess'),
     (r'^rack/(?P<rack_id>\d+)/$', 'bmabr.buildmeabikerack.views.rack'),                        
    
 

@@ -35,7 +35,6 @@ class Comment(models.Model):
       rack = models.ForeignKey(Rack)
 
 
-
 class Neighborhoods(models.Model):
     gid = models.IntegerField(primary_key=True)
     state = models.CharField(max_length=2)
@@ -58,17 +57,25 @@ class  CommunityBoard(models.Model):
     borocd = models.IntegerField()
     the_geom = models.MultiPolygonField()
     name = models.IntegerField()
-    neighborhoods = models.ManyToManyField(Neighborhoods)
+    neighborhoods = models.CharField(max_length=100)
     population_1980 = models.IntegerField(blank=True, null=True)
     population_1990 = models.IntegerField(blank=True, null=True)
     population_2000 = models.IntegerField(blank=True, null=True)
     borough = models.CharField(max_length=20)
     objects = models.GeoManager()
+
     class Meta:
         db_table = u'gis_comunity_board'
+        ordering = ['name']
+
 
 
 
 class RackForm(ModelForm): 
     class Meta: 
         model = Rack 
+
+class CommentForm(ModelForm): 
+    class Meta: 
+        model = Comment
+        
