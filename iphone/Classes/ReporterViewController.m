@@ -59,10 +59,10 @@
 	NSString *tempMessage = nil;
 	
 	NSString *eyesServer = nil;
-	eyesServer = [[NSString alloc] initWithFormat:@"http://localhost/~anil/test_post.php"];
+	eyesServer = [[NSString alloc] initWithFormat:@"http://novalis.org/cgi/location.cgi"];
 	
 	NSString *postContent = nil;
-	postContent = [[NSString alloc] initWithFormat:@"problem=%@&latitude=%f&longitude=%f&timeStamp=%@", txtProblem.text, latitude, longitude, timeStamp];
+	postContent = [[NSString alloc] initWithFormat:@"report=%@&lat=%f&lng=%f&date=%@", txtProblem.text, latitude, longitude, timeStamp];
 	
 	// url is set to be some URL string.
 	NSMutableURLRequest* post = [NSMutableURLRequest requestWithURL: [NSURL URLWithString: eyesServer]];
@@ -83,7 +83,7 @@
 	[eyesServer release];
 	
 	[tempMessage release];
-	[[MyCLController sharedInstance].locationManager stopUpdatingLocation];
+	//[[MyCLController sharedInstance].locationManager stopUpdatingLocation];
 	
 	
 }

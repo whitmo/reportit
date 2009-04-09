@@ -81,7 +81,7 @@ static MyCLController *sharedCLDelegate = nil;
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init]  autorelease];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-	[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm'Z'"];
+	[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
 	[locationTimeStamp appendFormat:@"%@\n\n", [dateFormatter stringFromDate:newLocation.timestamp]];
 	
 	// Horizontal coordinates
