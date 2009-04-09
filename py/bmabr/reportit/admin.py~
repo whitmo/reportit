@@ -1,0 +1,9 @@
+
+from webmaps.trackit.models import Issue 
+from django.contrib import admin 
+
+class IssueAdmin(admin.ModelAdmin): 
+    list_display = ('date','lng')
+
+admin.site.register(Issue, IssueAdmin)
+

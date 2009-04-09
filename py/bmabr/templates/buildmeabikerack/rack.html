@@ -1,0 +1,137 @@
+{% extends "buildmeabikerack/base.html" %} 
+{% block title %} fixcity - overview page  {% endblock %} 
+
+{% block header %} 
+
+<script src="http://localhost/openlayers/OpenLayers.js"></script>
+<script defer="defer" type="text/javascript">
+    var map, layer, select;
+    var options = {
+            projection: new OpenLayers.Projection("EPSG:900913"),
+	    displayProjection: new OpenLayers.Projection("EPSG:4326"),
+	    units: "m",
+	    numZoomLevels:19,
+            maxResolution: 156543.03390625,
+	    maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+					     20037508.34, 20037508.34)
+	   };
+
+        function init(){
+	map = new OpenLayers.Map('overview-map',options);
+
+	var osm = new OpenLayers.Layer.WMS(
+                 "OpenStreetMap",
+                 "http://maps.opengeo.org/geoserver/gwc/service/wms",   
+       {
+            layers: "openstreetmap", 
+            format: "image/png",
+            bgcolor: '#A1BDC4'
+            }, 
+            {wrapDateLine: true} 
+        );
+
+    {% for rack in rack_query %} 
+        var rack = new OpenLayers.Layer.Vector("Racks", {
+                    projection: map.displayProjection,
+
+                    strategies: [
+                        new OpenLayers.Strategy.Fixed(),
+                    ],  
+
+                    protocol: new OpenLayers.Protocol.HTTP({
+                        url: "./rack/{{rack.id}}.kml",
+                    params: {         
+                        },
+                        format: new OpenLayers.Format.KML()
+                    }),
+                });
+    {% endfor %} 
+
+
+    map.addLayers([osm,rack]);
+    var center = new OpenLayers.LonLat(-73.94,40.63);  
+    center.transform(map.displayProjection, map.projection)
+    map.setCenter(center,10)
+}
+
+</script>    
+
+
+<script defer="defer" type="text/javascript">
+window.onload = function(){
+  init() ;
+}
+</script>
+
+
+{% endblock %}
+
+{% block menu %} 
+<ul id="menu">
+  <li>
+    <a href="/">(1) REQUEST</a>
+    <p> Request a bike rack </p>
+  </li>
+  <li class="arrow"> </li>
+  <li class="active">
+    <a href="/assess/">(2) ASSESS</a>
+    <p> Assess current requested locations </p>
+  </li>
+  <li class="arrow"> </li>
+  <li>
+    <a href="/submit/">(3) SUBMIT</a>
+    <p> Submit your request to the DOT </p>
+  </li>
+  <li class="arrow"> </li>
+  <li>
+    <a href="/built/"> (4) BUILT</a>
+    <p> See racks aready built </p>
+  </li>
+</ul>
+
+{% endblock %} 
+
+{% block content %} 
+
+{% for rack in rack_query %} 
+<div id="overview-map"> </div>
+<div id="overview-about">
+<h2>{{rack.address}}</h2>
+<p> <a href="/rack/{{rack.id}}.kml">Download rack request as kml</a></p>
+<p>{{rack.date}}</p>
+<p> {{rack.meta}} </p>
+</div>
+<hr />
+
+<div id="overview-comment">
+<h3>Comments</h3>
+
+<form action="/comment/add/" method="post"> 
+<p> Leave a comment about this rack request </p>
+<textarea name="text"> </textarea> <br />
+<p>Contact email </p>
+<input type="text" name="contact_email" />
+<select name="rack" id="id_rack">
+<option value="{{rack.id}}"></option>
+</select>
+<input type="submit" value="Add a comment"/>
+</form>
+
+<hr />
+{% endfor %} 
+<a name="comments"> </a>
+<ul class="comments"> 
+{% for comment in comment_query %} 
+   <li>
+     <p> {{comment.text}}</p>
+     <p>{{comment.contact_email}}</p>
+   </li>
+
+{% endfor %} 
+</ul>
+</div>
+
+{% endblock %} 
+
+
+
